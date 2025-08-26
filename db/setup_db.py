@@ -1,10 +1,6 @@
 import psycopg2
-import os
+import streamlit as st
 import logging
-from dotenv import load_dotenv
-
-# Load environment variables from .env
-load_dotenv()
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -12,17 +8,21 @@ logger = logging.getLogger(__name__)
 
 def get_db_conn():
     """
-    Returns a psycopg2 connection using credentials from environment variables.
+    Returns a psycopg2 connection using credentials from Streamlit secrets.
     """
     try:
+        # Load database credentials from Streamlit Secrets
+        db = st.secrets["DB"]
+
         conn = psycopg2.connect(
-            host=os.getenv("DB_HOST"),
-            user=os.getenv("DB_USER"),
-            password=os.getenv("DB_PASSWORD"),
-            dbname=os.getenv("DB_DATABASE"),
-            port=os.getenv("DB_PORT", 5432),
+            host=db["DB_HOST"],
+            user=db["DB_USER"],
+            password=db["DB_PASSWORD"],
+            dbname=db["DB_DATABASE"],
+            port=db["DB_PORT"]
         )
         return conn
+
     except Exception as e:
         logger.exception("Failed to connect to DB")
         return None
@@ -38,9 +38,9 @@ def init_db():
         return
 
     try:
-        with conn.cursor() as c:
+        with conn.cursor() as cursor:
             # Create users table
-            c.execute("""
+            cursor.execute("""
                 CREATE TABLE IF NOT EXISTS users (
                     id SERIAL PRIMARY KEY,
                     username VARCHAR(255) NOT NULL UNIQUE,
@@ -52,7 +52,7 @@ def init_db():
             """)
 
             # Create user_sessions table
-            c.execute("""
+            cursor.execute("""
                 CREATE TABLE IF NOT EXISTS user_sessions (
                     session_id VARCHAR(255) PRIMARY KEY,
                     username VARCHAR(255) NOT NULL,
