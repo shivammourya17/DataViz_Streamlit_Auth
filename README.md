@@ -15,7 +15,7 @@ It combines a **production-ready authentication system** (with MFA & RBAC) and a
 * **Role-Based Access Control (RBAC):** Admin & user roles with different permissions
 * **Session Management:** Secure sessions with configurable timeouts
 * **Password Reset:** Self-service reset with MFA verification
-* **Database Integration:** MySQL with proper connection pooling
+* **Database Integration:** Postgres with proper connection pooling
 
 ### 📊 AI-Powered Data Visualization
 
@@ -35,7 +35,7 @@ It combines a **production-ready authentication system** (with MFA & RBAC) and a
 ### 🔧 Prerequisites
 
 * Python **3.8+**
-* MySQL Database
+* Postgres Database
 
 ---
 
@@ -57,9 +57,9 @@ pip install -r requirements.txt
 3️⃣ Create a `.env` file in the root directory:
 
 ```ini
-DB_HOST=your_mysql_host
-DB_USER=your_mysql_user
-DB_PASSWORD=your_mysql_password
+DB_HOST=your_Postgres_host
+DB_USER=your_Postgres_user
+DB_PASSWORD=your_Postgres_password
 DB_DATABASE=your_database_name
 ```
 
@@ -129,10 +129,10 @@ Dataviz-StreamlitMFA-Auth/
 
 | Variable     | Description         | Required |
 | ------------ | ------------------- | -------- |
-| DB\_HOST     | MySQL database host | ✅        |
-| DB\_USER     | MySQL username      | ✅        |
-| DB\_PASSWORD | MySQL password      | ✅        |
-| DB\_DATABASE | MySQL database name | ✅        |
+| DB\_HOST     | Postgres database host | ✅        |
+| DB\_USER     | Postgres username      | ✅        |
+| DB\_PASSWORD | Postgres password      | ✅        |
+| DB\_DATABASE | Postgres database name | ✅        |
 
 ---
 
@@ -151,7 +151,7 @@ Dataviz-StreamlitMFA-Auth/
 
 * Support for **Excel & JSON uploads**
 * Advanced **data cleaning & preprocessing** tools
-* Integration with **cloud databases** (Postgres, BigQuery, Snowflake)
+* Integration with **cloud databases** (BigQuery, Snowflake)
 * Customizable **user dashboards**
 
 ---
