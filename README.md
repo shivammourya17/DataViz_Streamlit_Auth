@@ -78,7 +78,7 @@ streamlit run dashboard_app.py
 
 ```
 streamlit>=1.28.0
-pymysql>=1.1.0
+psycopg2-binary
 bcrypt>=4.0.0
 pyotp>=2.9.0
 qrcode>=7.4.0
